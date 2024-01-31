@@ -1,0 +1,23 @@
+name: Install R Packages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  install-packages:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up R
+      uses: r-lib/actions/setup-r@v1
+      with:
+        r-version: 4.1.0
+
+    - name: Install dependencies
+      run: Rscript -e 'install.packages(c("ggplot2", "DBI"))'
